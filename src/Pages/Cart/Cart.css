@@ -1,0 +1,18 @@
+.mainCart {
+  height: 80vh;
+  margin-top: 5vh;
+}
+
+.footerCart {
+  height: 14vh;
+  margin-left: 35vw;
+  margin-right: 6vw;
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalPrice {
+  margin-bottom: 8vh;
+  font-size: 18px;
+}

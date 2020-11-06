@@ -1,0 +1,54 @@
+.container-card {
+  height: 80vh!important;
+}
+
+.card-content {
+  width: 90vw;
+  margin: 10px auto 10px auto!important;
+  flex-direction: row!important;
+}
+
+.favorite {
+  background: none;
+  border: none;
+}
+
+button:focus,
+button:active {
+    outline: none!important;
+}
+
+header {
+  height: 9vh;
+  display: flex!important;
+  justify-content: space-around;
+  align-items: center;
+}
+
+header .search input {
+  width: 30vw;
+  border-radius: 4px;
+}
+
+header .search button {
+  background: transparent;
+  outline: none!important;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-left: 5px;
+}
+
+#nav-dropdown::after{
+  display: none; 
+}
+
+#nav-dropdown::before{
+  content: "Categorias ->";
+}
+
+footer {
+  height: 11vh;
+  display: flex!important;
+  justify-content: center;
+  align-items: center;
+}

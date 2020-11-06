@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "32\" Full HD Flat Smart TV H5103 Series 3",
+      "description": "Com o Modo futebol, é como se você estivesse realmente no jogo. Ele exibe, de forma precisa e viva, a grama verde do campo e todas as outras cores do estádio. Um poderoso efeito de som multi-surround também permite que você ouça toda a empolgação. Você pode até mesmo ampliar áreas selecionadas da tela para uma melhor visualização. Com apenas o toque de um botão, você pode aproveitar ao máximo o seu esporte favorito com todos os seus amigos.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/fda44b12-48f7-11e6-996c-0aad52ea90db.jpeg",
+      "price": 1466.10,
+      "category_id": 1
+    },
+    {
+      "id": 2,
+      "name": "40\" Full HD Flat Smart TV H5103 Series 5",
+      "description": "Usando um algoritmo avançado de melhoria da qualidade de imagem, o Wide Color Enhancer Plus da Samsung melhora consideravelmente a qualidade de qualquer imagem e revela detalhes ocultos. Com o Wide Color Enhancer Plus, agora você verá as cores como elas realmente devem ser vistas.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/fe41bc44-48f7-11e6-a3ac-0a9a90ee83e3.jpeg",
+      "price": 1979.10,
+      "category_id": 1
+    },
+    {
+      "id": 3,
+      "name": "65\" UHD 4K Flat Smart TV JU6000 Series 6",
+      "description": "Sua Smart TV vai possibilitar você baixar e acessar aplicativos e assistir conteúdo de vídeos da internet em uma tela muito melhor. Desfrute do Netflix e You Tube com toda a qualidade de imagem da sua TV.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/fd08d6e6-48f7-11e6-886b-0a37f4bea89f.jpeg",
+      "price": 10999.00,
+      "category_id": 1
+    },
+    {
+      "id": 4,
+      "name": "Galaxy A5 2016",
+      "description": "Alta performance Hardware de alta qualidade e performance para navegação na internet. O processador Octa-Core permite carregamento de páginas de navegadores instantaneamente, transições de interfaces de maneira suave e multitarefa. O Galaxy A permite também a expansão de memória.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/07b3b1d8-48f8-11e6-aa97-020adee616d7.jpeg",
+      "price": 1979.10,
+      "category_id": 2
+    },
+    {
+      "id": 5,
+      "name": "Galaxy J3 2016",
+      "description": "O novo Galaxy J apresenta uma frente redesenhada com visual formidável, levando a experiência de visualização a um novo nível. Com uma moldura toda preta e mais fina, de 4.56 mm, a nova estrutura proporciona uma experiência envolvente em tela ampla",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/08da337a-48f8-11e6-9634-02184f9c0531.jpeg",
+      "price": 899.10,
+      "category_id": 2
+    },
+    {
+      "id": 6,
+      "name": "Galaxy J7 Metal",
+      "description": "Resistente o suficiente para preservar sua boa aparência. A moldura integrada totalmente metálica e harmoniosamente uniforme protege contra o descascamento, para que você possa ficar tranquilo e admirar seu aparelho por muito tempo.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/0903ec60-48f8-11e6-886b-0a37f4bea89f.jpeg",
+      "price": 1439.10,
+      "category_id": 2
+    },
+    {
+      "id": 7,
+      "name": "Lavadora e Secadora WD103 10.1 kg Branca 127 V",
+      "description": "A tecnologia revolucionária EcoBubble™ dissolve o sabão com ar e água antes do início do ciclo, gerando bolhas de limpeza que penetram no tecido de forma mais rápida do que o sabão concentrado. Lave as roupas em água fria com a mesma eficiência da água quente. A água fria não agride as roupas e protege o tecido impermeável. *Baseado no teste interno (Samsung Electronics), aparelho Seine Combo de 9 kg, meia carga (4 kg), programa algodão da Samsung (40 ℃) vs programa Super Eco (frio) **Os resultados reais podem variar de acordo com o modelo e as condições ambientais específicas que os consumidores encontram ao operar a máquina.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/0c733874-48f8-11e6-ad8d-02878eee0871.jpeg",
+      "price": 2136.60,
+      "category_id": 3
+    },
+    {
+      "id": 8,
+      "name": "Lavadora e Secadora WD6000 9 kg Branca 127 V",
+      "description": "Economize energia lavando grandes cargas de roupa a frio com a tecnologia Eco Bubble™. As bolhas dissolvem e ativam o detergente, para que ele penetre as tramas do tecido mais depressa e, assim, limpe de maneira eficaz mesmo com água fria (15 °C).",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/0b65b97a-48f8-11e6-886b-0a37f4bea89f.jpeg",
+      "price": 2699.10,
+      "category_id": 3
+    },
+    {
+      "id": 9,
+      "name": "Lavadora e Secadora WD7000 15 kg Inox Look 127V",
+      "description": "A tecnologia Eco Bubble™ utiliza bolhas que rapidamente ativam o sabão, removendo manchas mais facilmente. Soma-se a ela o Bubble Shot™: dois jatos extra de água, que auxiliam na penetração do sabão, antes do enxágue dos resíduos.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/0a233ab0-48f8-11e6-ad8d-02878eee0871.jpeg",
+      "price": 4049.10,
+      "category_id": 3
+    },
+    {
+      "id": 10,
+      "name": "Samsung Essentials E22",
+      "description": "Bateria com duração de até 8 horasSurpreenda-se com uma bateria que acompanha o seu ritmo e não te deixa na mão. Até 8 horas* para ficar online ou realizar suas tarefas sem preocupação! E mais, com o novo Battery Life Plus 2.0 a bateria mantém até 90%* da capacidade original mesmo após 100 ciclos de carga (equivalente a 3 anos de uso). * A bateria poderá, dependendo das condições de uso, proporcionar o tempo de utilização e vida útil informados acima",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/fb4654d2-48f7-11e6-a3ac-0a9a90ee83e3.jpeg",
+      "price": 1624.49,
+      "category_id": 4
+    },
+    {
+      "id": 11,
+      "name": "Samsung Expert X20",
+      "description": "Performance e tecnologia que proporcionam muita rapidez na realização das suas tarefas, permitindo executar mesmo os softwares e aplicativos mais pesados.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/f99eb282-48f7-11e6-a3ac-0a9a90ee83e3.jpeg",
+      "price": 2214.44,
+      "category_id": 4
+    },
+    {
+      "id": 12,
+      "name": "Samsung Expert X51",
+      "description": "Muita rapidez na realização das suas tarefas, permitindo executar mesmo os softwares e aplicativos mais pesados. Jogos, vídeos, processamento e edição gráfica com alta performance e qualidade. São as melhores imagens e gráficos em uma tela Full HD de altíssima resolução.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/fa346368-48f7-11e6-ad8d-02878eee0871.jpeg",
+      "price": 3521.74,
+      "category_id": 4
+    },
+    {
+      "id": 13,
+      "name": "Smart Camera NX30",
+      "description": "A versátil SMART CAMERA Samsung NX30 entrega o desempenho que você precisa. Seu sensor APS-C CMOS de 20.3 MP garante imagens brilhantes mesmo em situações de pouca luz. O sistema de autofoco híbrido de última geração fornece foco preciso e a velocidade do obturador de 1/8000 segundos permite a você capturar objetos em alta velocidade com pouco ou nenhum borrão.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/03522d4a-48f8-11e6-a3ac-0a9a90ee83e3.jpeg",
+      "price": 1925.10,
+      "category_id": 5
+    },
+    {
+      "id": 14,
+      "name": "Smart Camera NX300M",
+      "description": "Quando você estiver fotografando uma ação de movimento rápido, como um jogador de tênis se preparando para uma jogada junto à rede, capture toda a sequência facilmente com uma série de fotografias incrivelmente nítidas. A SMART CAMERA Samsung NX300M permite efetuar um disparo contínuo a uma velocidade ultrarrápida de 8,6 quadros por segundo, para garantir que você obtenha a fotografia desejada. O avançado sistema de foco automático proporciona máxima nitidez aos objetos em movimento rápido, e um curto intervalo de disparo do obturador ajuda a capturar o momento fugaz antes que o objeto saia do enquadramento.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/04a6af86-48f8-11e6-ad8d-02878eee0871.jpeg",
+      "price": 2024.10,
+      "category_id": 5
+    },
+    {
+      "id": 15,
+      "name": "Smart Camera Nxmini 9-27mm",
+      "description": "Com um corpo sólido de magnésio superior ornado por materiais naturais semelhantes ao couro, a NX mini é requintadamente moderna com um toque perfeito de analógico. Simplesmente elegante.",
+      "photo": "https://simplest-meuspedidos-arquivos.s3.amazonaws.com/media/imagem_produto/133421/06cfe8d6-48f8-11e6-9634-02184f9c0531.jpeg",
+      "price": 1530.00,
+      "category_id": null
+    }
+  ]
+}
