@@ -23,6 +23,9 @@ export default function catalog(state = [], action) {
         }
       });
 
+      case 'CLEAR_CART':
+        return [];
+
     default:
       return state;
   }

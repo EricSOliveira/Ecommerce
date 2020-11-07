@@ -1,9 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 // import axios from 'axios';
 
-import api from '../../services/api';
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "../../components/LoginButton";
+import LogoutButton from "../../components/LogoutButton";
+
+import api from "../../services/api";
 
 import CategoriesData from "../../data/categoriesList.json";
 
@@ -16,7 +20,11 @@ import { BsSearch, BsList } from "react-icons/bs";
 import "./Catalog.css";
 
 function Catalog() {
+  const { isAuthenticated } = useAuth0();
+  const history = useHistory();
   const dispatch = useDispatch();
+
+  const [inputSearch, setInputSearch] = useState("");
 
   const [data, setData] = useState([]);
   const [dataListControl, setDataListControl] = useState([]);
@@ -31,6 +39,14 @@ function Catalog() {
   const [favorite, setFavorite] = useState(false);
   const [favoriteArray, setFavoriteArray] = useState([]);
 
+  const loadApi = useCallback(async () => {
+    const response = await api.get("data");
+    const dataList = await response.data;
+    setDataListControl(dataList);
+    data.forEach((e) => (e.item = item));
+    dataListControl.forEach((e) => (e.item = item));
+  }, [dataListControl, data, item]);
+
   useEffect(() => {
     // axios.get('https://jsonplaceholder.typicode.com/posts/') ('https://pastebin.com/raw/8t83iHMc')
     //  .then((response) => {
@@ -38,25 +54,15 @@ function Catalog() {
     //   console.log(dataList);
     //  })
 
-    async function loadApi(){
-      const response = await api.get('data');
-      const dataList = await response.data;
-      setDataListControl(dataList);
-      data.forEach((e) => (e.item = item));
-      dataListControl.forEach((e) => (e.item = item));
-    }
-
-    loadApi()
-  }, [])
-
+    loadApi();
+  }, []);
 
   useEffect(() => {
     fetchItems();
     checkForFavorites();
 
     setData(dataListControl);
-  }, [dataListControl])
-
+  }, [dataListControl]);
 
   const fetchItems = () => {
     // axios.get('https://pastebin.com/raw/nE1gbL9r')
@@ -64,15 +70,14 @@ function Catalog() {
     //    const categoriesList = response.data
     //   console.log('categoriesList', categoriesList);
     //  })
-  
+
     const dataCategories = CategoriesData;
     setCategoriesList(dataCategories);
 
     dataListControl.forEach((e) => itemUpdate.splice(0, 0, 0));
 
     dataListControl.forEach((e) => pricePerItem.splice(0, 0, 0));
-  };
-
+  }
 
   function checkForFavorites() {
     dataListControl.forEach((e) => favoriteArray.splice(0, 0, false));
@@ -85,7 +90,6 @@ function Catalog() {
       localStorage.setItem("favoriteArray", JSON.stringify(favoriteArray));
     }
   }
-  
 
   function handleAddItem(event, element, index) {
     event.preventDefault();
@@ -115,14 +119,13 @@ function Catalog() {
     });
   }
 
-
   function handleRemoveItem(event, element, index) {
     event.preventDefault();
 
     let price = parseFloat(element.price);
     let amount = parseInt(itemUpdate[index]) - 1;
 
-    if(amount < 0) {
+    if (amount < 0) {
       amount = 0;
       itemUpdate[index] = 0;
       pricePerItem[index] = 0;
@@ -151,7 +154,6 @@ function Catalog() {
     });
   }
 
-
   function handleAddFavorite(event, index) {
     event.preventDefault();
 
@@ -162,20 +164,17 @@ function Catalog() {
     localStorage.setItem("favoriteArray", JSON.stringify(favoriteArray));
   }
 
-
   function handleFilterCategories(event, element) {
     const { id } = element;
-    const filterPerCategory = dataListControl.filter((e) => e.category_id === id);
+    const filterPerCategory = dataListControl.filter(
+      (e) => e.category_id === id,
+    );
     setData(filterPerCategory);
   }
-
 
   function handleCategories(event) {
     setData(dataListControl);
   }
-
-
-  const [inputSearch, setInputSearch] = useState("");
 
   function handleSearch(event) {
     const filterPerSearch = dataListControl.filter((e) =>
@@ -193,18 +192,20 @@ function Catalog() {
     }
   }, [inputSearch]);
 
-  const history = useHistory();
-
   const handleBuy = () => {
     const path = "/cart";
     history.push(path);
-  };
+  }
 
   return (
     <>
-      <header>
+      <header className="headerCatalog">
         <div className="search">
-          <input type="text" placeholder="Buscar..." onChange={(e) => setInputSearch(e.target.value)} />
+          <input
+            type="text"
+            placeholder="Buscar..."
+            onChange={(e) => setInputSearch(e.target.value)}
+          />
           <button onClick={(event) => handleSearch(event)}>
             <BsSearch size={30} />
           </button>
@@ -226,6 +227,8 @@ function Catalog() {
             </NavDropdown.Item>
           </NavDropdown>
         </Navbar>
+
+        {isAuthenticated && <LogoutButton size={90} />}
       </header>
 
       <main className="table-responsive container-card">
@@ -287,14 +290,25 @@ function Catalog() {
       </main>
 
       <footer>
-        <Button
-          variant="success"
-          style={{ width: "30%" }}
-          value={priceCount}
-          onClick={handleBuy}
-        >
-          Comprar R$ {priceCount.toFixed(2).replace(".", ",")}
-        </Button>
+        {isAuthenticated ? (
+          <div className="footer">
+            <Button
+              variant="success"
+              style={{ width: "30%" }}
+              value={priceCount}
+              onClick={handleBuy}
+            >
+              Comprar R$ {priceCount.toFixed(2).replace(".", ",")}
+            </Button>
+
+            {/* <div className="authenticated">
+              <span>Usuário: {user.name}</span>
+              <LogoutButton />
+            </div> */}
+          </div>
+        ) : (
+          <LoginButton />
+        )}
       </footer>
     </>
   );

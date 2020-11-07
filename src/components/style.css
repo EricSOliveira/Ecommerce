@@ -1,0 +1,40 @@
+.logout {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 140px;
+}
+
+.authenticated .photoUser {
+  cursor: pointer;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+
+.authenticated .dataUser {
+  position: absolute;
+  top: 60px;
+  right: 1vw;
+  z-index: 1000;
+  background: darkgrey;
+  color: black;
+  border-radius: 4px;
+}
+
+.authenticated:hover .dataUserShow {
+  display: block;
+}
+
+.dataUserShow {
+  display: none;
+  font-size: 13px;
+  margin: 5px;
+}
+
+.authenticated .dataUserShow:hover {
+  display: block;
+}

@@ -1,11 +1,31 @@
+.headerCart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 9vh;
+  padding: 0 5vw 0 35vw;
+}
+
+.headerCart h3 {
+  text-align: center;
+}
+
+.mainCartEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
 .mainCart {
   height: 80vh;
-  margin-top: 5vh;
 }
 
 .footerCart {
-  height: 14vh;
-  margin-left: 35vw;
+  height: 10vh;
+  margin-left: 39vw;
   margin-right: 6vw;
   display: flex !important;
   justify-content: space-between;
