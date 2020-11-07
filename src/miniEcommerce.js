@@ -6,6 +6,8 @@ import store from './store';
 
 import Catalog from './Pages/Catalog/Catalog';
 import Cart from './Pages/Cart/Cart';
+import TemplateCard from './Pages/Payment';
+
 
 function MiniEcommerce() {
   return (
@@ -14,6 +16,7 @@ function MiniEcommerce() {
         <Switch>
           <Route path='/' exact component={Catalog} />
           <Route path='/cart' component={Cart} />
+          <Route path='/payment' component={TemplateCard} />
         </Switch>
       </Router>
     </Provider>

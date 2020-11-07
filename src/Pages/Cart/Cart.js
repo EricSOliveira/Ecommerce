@@ -40,8 +40,12 @@ function Cart() {
     });
   }
 
-  const handleBuy = () => {
+  const handleComeback = () => {
     history.push("/");
+  };
+
+  const handleBuy = () => {
+    history.push("/payment");
   };
 
   return (
@@ -90,12 +94,12 @@ function Cart() {
           <Button
             variant="success"
             style={{ width: "40%" }}
-            onClick={handleBuy}
+            onClick={handleComeback}
           >
             Voltar
           </Button>
         ) : (
-          <Button variant="success" style={{ width: "40%" }} onClick={() => {}}>
+          <Button variant="success" style={{ width: "40%" }} onClick={handleBuy}>
             Finalizar Compra
           </Button>
         )}
