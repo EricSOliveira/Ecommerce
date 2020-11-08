@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-// import axios from 'axios';
 
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../../components/LoginButton";
@@ -48,12 +47,6 @@ function Catalog() {
   }, [dataListControl, data, item]);
 
   useEffect(() => {
-    // axios.get('https://jsonplaceholder.typicode.com/posts/') ('https://pastebin.com/raw/8t83iHMc')
-    //  .then((response) => {
-    //    const dataList = response.data
-    //   console.log(dataList);
-    //  })
-
     loadApi();
   }, []);
 

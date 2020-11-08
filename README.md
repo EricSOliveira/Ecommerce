@@ -14,12 +14,13 @@ yarn add ou npm install
 
 Rode o comando abaixo para iniciar a Fake API:
 
-json-server db.json -p 3333
+### `json-server db.json -p 3333`
 
+
+Inicie o projeto com yarn start ou npm start
 
 ### `yarn start` ou `npm start`
 
-Inicie o projeto com yarn start ou npm start
 
 Ele deverá ser aberto no modo de desenvolvimento na url:
 
