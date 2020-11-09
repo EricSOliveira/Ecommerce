@@ -3,11 +3,11 @@ Clone o repositório abaixo:
 $ git clone https://github.com/EricSOliveira/Ecommerce.git
 
 
-### `yarn add` ou `npm install`
+### `yarn install` ou `npm install`
 
 No seu repositório baixe as dependências com:
 
-yarn add ou npm install
+yarn install ou npm install
 
 
 ### Fake API
