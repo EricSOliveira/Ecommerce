@@ -10,7 +10,7 @@ No seu repositório baixe as dependências com:
 yarn install ou npm install
 
 
-### Fake API
+### SERVER JSON - API
 
 Rode o comando abaixo para iniciar a Fake API:
 
