@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -20,53 +20,95 @@ function TemplateCard() {
   const { isAuthenticated } = useAuth0();
 
   const itemsCatalog = useSelector((state) => state.catalog);
-  console.log("itemsCatalog", itemsCatalog);
+
   const [totalItems, setTotalItems] = useState(0);
   const history = useHistory();
 
-  const [dataPayload, setDataPayload] = useState([]);
+  // const [dataPayload, setDataPayload] = useState([]);
   const dispatch = useDispatch();
 
-  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const numberRef = useRef(null);
+  const nameRef = useRef(null);
+  const expiryRef = useRef(null);
+  const cvcRef = useRef(null);
 
-  const onSubmit = async (values) => {
-    await sleep(3000);
-    //window.alert(JSON.stringify(values, 0, 2));
-    window.alert('Pagamento realizado com sucesso!');
-    const data = JSON.stringify(values, 0, 2);
-    setDataPayload(data);
-    console.log("data", data);
-
-    await sleep(1000);
-
-    history.push("/");
-
-    const product = [];
-
-    dispatch({
-      type: "CLEAR_CART",
-      product,
-    });
+  const handleNumber = () => {
+    numberRef.current.style.borderColor = "black";
   };
 
+  const handleName = () => {
+    nameRef.current.style.borderColor = "black";
+  };
+
+  const handleExpiry = () => {
+    expiryRef.current.style.borderColor = "black";
+  };
+
+  const handleCvc = () => {
+    cvcRef.current.style.borderColor = "black";
+  };
+  
+  const onSubmit = (values) => {
+    const dataString = JSON.stringify(values, 0, 2);
+    const data = [JSON.parse(dataString)];
+
+    data.every((e) => {
+      if (e.number === undefined) {
+        window.alert("Preencha o campo número do cartão!");
+        numberRef.current.style.borderColor = "red";
+      }
+      if (e.name === undefined) {
+        window.alert("Preencha o campo nome!");
+        nameRef.current.style.borderColor = "red";
+      }
+      if (e.expiry === undefined) {
+        window.alert("Preencha o campo data de validade!");
+        expiryRef.current.style.borderColor = "red";
+      }
+      if (e.cvc === undefined) {
+        window.alert("Preencha o campo CVC!");
+        cvcRef.current.style.borderColor = "red";
+      }
+
+      if (
+        e.number === undefined ||
+        e.name === undefined ||
+        e.expiry === undefined ||
+        e.cvc === undefined
+      ) {
+        return false;
+      } else {
+        // setDataPayload(dataString);
+
+        setTimeout(() => {
+          window.alert("Pagamento realizado com sucesso!");
+
+          const product = [];
+          dispatch({
+            type: "CLEAR_CART",
+            product,
+          });
+        }, 3000);
+
+        setTimeout(() => {
+          history.push("/");
+        }, 4000);
+
+        return true;
+      }
+    });
+  };
 
   useEffect(() => {
     const totalItemsPrice = itemsCatalog.reduce((sum, { countPerItem }) => {
       return (sum += countPerItem);
     }, 0);
     setTotalItems(totalItemsPrice);
-  }, []);
+  }, [itemsCatalog]);
 
-
-  useEffect(() => {
-    console.log("dataPayload", dataPayload);
-  }, [dataPayload]);
-
-
-  const handleBuy = () => {
+  const handleComeback = () => {
     history.push("/cart");
   };
-
 
   return (
     <>
@@ -95,7 +137,7 @@ function TemplateCard() {
                   <form onSubmit={handleSubmit}>
                     <Card
                       number={values.number || ""}
-                      name={values.name || ""}
+                      name={values.name || "Seu Nome Aqui"}
                       expiry={values.expiry || ""}
                       cvc={values.cvc || ""}
                       focused={active}
@@ -107,7 +149,10 @@ function TemplateCard() {
                         type="text"
                         pattern="[\d| ]{16,22}"
                         placeholder="Número do Cartão"
+                        defaultValue=""
                         format={formatCreditCardNumber}
+                        ref={numberRef}
+                        onClick={handleNumber}
                       />
                     </div>
                     <div>
@@ -116,6 +161,9 @@ function TemplateCard() {
                         component="input"
                         type="text"
                         placeholder="Nome"
+                        id="inputName"
+                        ref={nameRef}
+                        onClick={handleName}
                       />
                     </div>
                     <div>
@@ -126,6 +174,8 @@ function TemplateCard() {
                         pattern="\d\d/\d\d"
                         placeholder="Data de Validade"
                         format={formatExpirationDate}
+                        ref={expiryRef}
+                        onClick={handleExpiry}
                       />
                       <Field
                         name="cvc"
@@ -134,6 +184,8 @@ function TemplateCard() {
                         pattern="\d{3,4}"
                         placeholder="CVC"
                         format={formatCVC}
+                        ref={cvcRef}
+                        onClick={handleCvc}
                       />
                     </div>
                     <div className="buttons">
@@ -155,7 +207,7 @@ function TemplateCard() {
                           height: "48px",
                           margin: "0 0 0 160px",
                         }}
-                        onClick={handleBuy}
+                        onClick={handleComeback}
                       >
                         Voltar
                       </Button>

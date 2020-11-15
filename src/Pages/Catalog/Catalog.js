@@ -29,10 +29,7 @@ function Catalog() {
   const [dataListControl, setDataListControl] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
 
-  const [item, setItem] = useState(0);
   const [priceCount, setPriceCount] = useState(0);
-
-  const [itemUpdate, setItemUpdate] = useState([]);
   const [pricePerItem, setPricePerItem] = useState([]);
 
   const [favorite, setFavorite] = useState(false);
@@ -42,9 +39,7 @@ function Catalog() {
     const response = await api.get("data");
     const dataList = await response.data;
     setDataListControl(dataList);
-    data.forEach((e) => (e.item = item));
-    dataListControl.forEach((e) => (e.item = item));
-  }, [dataListControl, data, item]);
+  }, []);
 
   useEffect(() => {
     loadApi();
@@ -54,23 +49,19 @@ function Catalog() {
     fetchItems();
     checkForFavorites();
 
+    data.forEach((e) => Object.assign(e, { item: 0 }));
+    dataListControl.forEach((e) => Object.assign(e, { item: 0 }));
+
     setData(dataListControl);
   }, [dataListControl]);
 
   const fetchItems = () => {
-    // axios.get('https://pastebin.com/raw/nE1gbL9r')
-    //  .then((response) => {
-    //    const categoriesList = response.data
-    //   console.log('categoriesList', categoriesList);
-    //  })
-
     const dataCategories = CategoriesData;
     setCategoriesList(dataCategories);
 
-    dataListControl.forEach((e) => itemUpdate.splice(0, 0, 0));
-
     dataListControl.forEach((e) => pricePerItem.splice(0, 0, 0));
-  }
+    setPricePerItem(pricePerItem);
+  };
 
   function checkForFavorites() {
     dataListControl.forEach((e) => favoriteArray.splice(0, 0, false));
@@ -92,8 +83,8 @@ function Catalog() {
 
     setPriceCount(count);
 
-    let amount = parseInt(itemUpdate[index]) + 1;
-    itemUpdate[index] = amount;
+    let amount = parseInt(element.item) + 1;
+    element.item = amount;
 
     let countPerItem = price * amount;
     pricePerItem[index] = countPerItem;
@@ -116,11 +107,11 @@ function Catalog() {
     event.preventDefault();
 
     let price = parseFloat(element.price);
-    let amount = parseInt(itemUpdate[index]) - 1;
+    let amount = parseInt(element.item) - 1;
 
     if (amount < 0) {
       amount = 0;
-      itemUpdate[index] = 0;
+      element.item = 0;
       pricePerItem[index] = 0;
       price = 0;
     }
@@ -130,7 +121,7 @@ function Catalog() {
 
     setPriceCount(count);
 
-    itemUpdate[index] = amount;
+    element.item = amount;
     pricePerItem[index] = countPerItem;
 
     const product = {
@@ -157,8 +148,9 @@ function Catalog() {
     localStorage.setItem("favoriteArray", JSON.stringify(favoriteArray));
   }
 
-  function handleFilterCategories(event, element) {
+  function handleFilterCategories(event, element, index) {
     const { id } = element;
+
     const filterPerCategory = dataListControl.filter(
       (e) => e.category_id === id,
     );
@@ -188,7 +180,7 @@ function Catalog() {
   const handleBuy = () => {
     const path = "/cart";
     history.push(path);
-  }
+  };
 
   return (
     <>
@@ -208,7 +200,9 @@ function Catalog() {
           <NavDropdown title={<BsList size={40} />} id="nav-dropdown">
             {categoriesList.map((element, index) => (
               <NavDropdown.Item
-                onClick={(event) => handleFilterCategories(event, element)}
+                onClick={(event) =>
+                  handleFilterCategories(event, element, index)
+                }
                 key={element.id}
               >
                 {element.name}
@@ -243,12 +237,12 @@ function Catalog() {
             </Card.Body>
 
             <Card.Body className="col-sm-6 col-md-2 text-center my-auto">
-              <Card.Text>{itemUpdate[index]} UN</Card.Text>
+              <Card.Text>{element.item} UN</Card.Text>
 
               <Button
                 variant="success"
                 style={{ width: "70%", marginTop: "20%" }}
-                value={itemUpdate[index]}
+                value={element.item}
                 onClick={(event) => handleAddItem(event, element, index)}
               >
                 +
@@ -272,7 +266,7 @@ function Catalog() {
               <Button
                 variant="danger"
                 style={{ width: "70%", marginTop: "27%" }}
-                value={itemUpdate[index]}
+                value={element.item}
                 onClick={(event) => handleRemoveItem(event, element, index)}
               >
                 -

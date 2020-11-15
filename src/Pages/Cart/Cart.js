@@ -16,7 +16,6 @@ function Cart() {
   const { isAuthenticated } = useAuth0();
 
   const [totalItems, setTotalItems] = useState(0);
-  const [deleteItem, setDeleteItem] = useState(0);
   const dispatch = useDispatch();
   const itemsCatalog = useSelector((state) => state.catalog);
   const history = useHistory();
@@ -26,9 +25,7 @@ function Cart() {
       return (sum += countPerItem);
     }, 0);
     setTotalItems(totalItemsPrice);
-  }, []);
 
-  useEffect(() => {
     const deleteItemCart = itemsCatalog.reduce((sum, { countPerItem }) => {
       return (sum += countPerItem);
     }, 0);
@@ -102,7 +99,6 @@ function Cart() {
                           border: "none",
                           background: "transparent",
                         }}
-                        value={deleteItem}
                         onClick={(event) => handleRemoveItem(event, index)}
                       >
                         <BsTrash size={30} />
