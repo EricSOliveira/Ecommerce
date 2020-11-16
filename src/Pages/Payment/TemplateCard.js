@@ -24,7 +24,6 @@ function TemplateCard() {
   const [totalItems, setTotalItems] = useState(0);
   const history = useHistory();
 
-  // const [dataPayload, setDataPayload] = useState([]);
   const dispatch = useDispatch();
 
   const numberRef = useRef(null);
@@ -47,7 +46,7 @@ function TemplateCard() {
   const handleCvc = () => {
     cvcRef.current.style.borderColor = "black";
   };
-  
+
   const onSubmit = (values) => {
     const dataString = JSON.stringify(values, 0, 2);
     const data = [JSON.parse(dataString)];
@@ -188,35 +187,46 @@ function TemplateCard() {
                         onClick={handleCvc}
                       />
                     </div>
+
+                    <div className="comeback">
+                      <div style={{ fontWeight: "bold", margin: "10px 0 0 0" }}>
+                        Total: R$ {totalItems.toFixed(2).replace(".", ",")}
+                      </div>
+                    </div>
+
                     <div className="buttons">
-                      <button type="submit" disabled={submitting}>
+                      <button
+                        type="submit"
+                        disabled={submitting}
+                        style={{
+                          width: "18%",
+                          background: "#218838",
+                          color: "white",
+                          borderColor: "#1e7e34",
+                        }}
+                      >
                         Pagar
                       </button>
                       <button
                         type="button"
                         onClick={form.reset}
                         disabled={submitting || pristine}
+                        style={{ width: "20%" }}
                       >
                         Resetar
                       </button>
-                    </div>
-                    <div className="comeback">
                       <Button
                         style={{
-                          width: "20%",
+                          width: "18%",
                           height: "48px",
-                          margin: "0 0 0 160px",
+                          background: "#007bff",
+                          color: "white",
                         }}
                         onClick={handleComeback}
                       >
                         Voltar
                       </Button>
-                      <div style={{ margin: "0 0 15px 20px" }}>
-                        Total: R$ {totalItems.toFixed(2).replace(".", ",")}
-                      </div>
                     </div>
-                    {/* <h2>Values</h2>
-                      <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                   </form>
                 );
               }}

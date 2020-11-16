@@ -95,6 +95,7 @@ function Catalog() {
       photo: element.photo,
       amount: amount,
       countPerItem: countPerItem,
+      priceUnity: price,
     };
 
     dispatch({

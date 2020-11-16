@@ -9,6 +9,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { BsTrash } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
+import { MdAddCircle, MdRemoveCircle } from "react-icons/md";
 
 import "./Cart.css";
 
@@ -40,6 +41,30 @@ function Cart() {
     dispatch({
       type: "REMOVE_ITEM",
       product,
+    });
+  }
+
+  function incrementAmount(element) {
+    const { id, amount, countPerItem, priceUnity } = element;
+
+    dispatch({
+      type: "UPDATE_ADD_ITEM",
+      id,
+      amount,
+      countPerItem,
+      priceUnity,
+    });
+  }
+
+  function decrementAmount(element) {
+    const { id, amount, countPerItem, priceUnity } = element;
+
+    dispatch({
+      type: "UPDATE_REMOVE_ITEM",
+      id,
+      amount,
+      countPerItem,
+      priceUnity,
     });
   }
 
@@ -83,7 +108,25 @@ function Cart() {
                         {element.name}
                       </Card.Title>
 
-                      <Card.Text>{element.amount} UN</Card.Text>
+                      <Card.Text className="ml-2">
+                        <strong>{element.amount}</strong> UN
+                      </Card.Text>
+
+                      <button
+                        type="button"
+                        onClick={() => decrementAmount(element)}
+                        className="border-0 bg-transparent"
+                      >
+                        <MdRemoveCircle size={27} color="#191919" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => incrementAmount(element)}
+                        className="border-0 bg-transparent"
+                      >
+                        <MdAddCircle size={27} color="#191919" />
+                      </button>
                     </Card.Body>
 
                     <Card.Body className="col-sm-6 col-md-2 text-center my-auto">
@@ -113,20 +156,30 @@ function Cart() {
           <footer className="footerCart">
             {totalItems === 0 ? (
               <Button
-                variant="success"
-                style={{ width: "40%" }}
+                variant="primary"
+                style={{ width: "40%", marginLeft: "15%" }}
                 onClick={handleComeback}
               >
                 Voltar
               </Button>
             ) : (
-              <Button
-                variant="success"
-                style={{ width: "40%" }}
-                onClick={handleBuy}
-              >
-                Finalizar Compra
-              </Button>
+              <>
+                <Button
+                  variant="primary"
+                  style={{ width: "25%" }}
+                  onClick={handleComeback}
+                >
+                  Voltar
+                </Button>
+
+                <Button
+                  variant="success"
+                  style={{ width: "25%" }}
+                  onClick={handleBuy}
+                >
+                  Finalizar Compra
+                </Button>
+              </>
             )}
 
             <div className="totalPrice">

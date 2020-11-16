@@ -1,4 +1,4 @@
-export default function reserve(state = [], action) {
-  console.log(action)
+export default function cart(state = [], action) {
   return []
+
 }
