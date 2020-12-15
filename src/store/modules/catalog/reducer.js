@@ -27,7 +27,7 @@ export default function catalog(state = [], action) {
         const productIndex = draft.findIndex((p) => p.id === action.id);
         if (productIndex >= 0) {
           draft[productIndex].amount += 1;
-          draft[productIndex].countPerItem += action.priceUnity;
+          draft[productIndex].countPerItem += action.price;
         }
       });
 
@@ -40,7 +40,7 @@ export default function catalog(state = [], action) {
         const productIndex = draft.findIndex((p) => p.id === action.id);
         if (productIndex >= 0) {
           draft[productIndex].amount -= 1;
-          draft[productIndex].countPerItem -= action.priceUnity;
+          draft[productIndex].countPerItem -= action.price;
         }
       });
     }

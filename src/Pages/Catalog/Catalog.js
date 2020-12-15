@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -22,6 +22,7 @@ function Catalog() {
   const { isAuthenticated } = useAuth0();
   const history = useHistory();
   const dispatch = useDispatch();
+  const itemsCatalog = useSelector((state) => state.catalog);
 
   const [inputSearch, setInputSearch] = useState("");
 
@@ -35,6 +36,9 @@ function Catalog() {
   const [favorite, setFavorite] = useState(false);
   const [favoriteArray, setFavoriteArray] = useState([]);
 
+  const [, setUnusedState] = useState();
+  const forceUpdate = useCallback(() => setUnusedState({}), []);
+
   const loadApi = useCallback(async () => {
     const response = await api.get("data");
     const dataList = await response.data;
@@ -43,37 +47,75 @@ function Catalog() {
 
   useEffect(() => {
     loadApi();
-  }, []);
+  }, [loadApi]);
 
   useEffect(() => {
-    fetchItems();
-    checkForFavorites();
-
-    data.forEach((e) => Object.assign(e, { item: 0 }));
     dataListControl.forEach((e) => Object.assign(e, { item: 0 }));
-
     setData(dataListControl);
   }, [dataListControl]);
 
-  const fetchItems = () => {
-    const dataCategories = CategoriesData;
-    setCategoriesList(dataCategories);
+  useEffect(() => {
+    const checkItemsInCart = () => {
+      itemsCatalog.forEach((index) => {
+        const productIndex = data.findIndex((p) => p.id === index.id);
 
-    dataListControl.forEach((e) => pricePerItem.splice(0, 0, 0));
-    setPricePerItem(pricePerItem);
-  };
+        if (productIndex >= 0) {
+          data[productIndex].item = index.amount;
+        }
+      });
+      setData(data);
+      forceUpdate();
+    };
 
-  function checkForFavorites() {
-    dataListControl.forEach((e) => favoriteArray.splice(0, 0, false));
+    checkItemsInCart();
 
-    const getFavoriteArray = JSON.parse(localStorage.getItem("favoriteArray"));
+    const totalItemsPriceInCart = itemsCatalog.reduce(
+      (sum, { countPerItem }) => {
+        return (sum += countPerItem);
+      },
+      0,
+    );
+    setPriceCount(totalItemsPriceInCart);
+  }, [data, forceUpdate, itemsCatalog]);
 
-    if (getFavoriteArray !== null) {
-      setFavoriteArray(getFavoriteArray);
-    } else {
-      localStorage.setItem("favoriteArray", JSON.stringify(favoriteArray));
+  useEffect(() => {
+    data.forEach((e) => Object.assign(e, { item: 0 }));
+
+    const fetchItems = () => {
+      const dataCategories = CategoriesData;
+      setCategoriesList(dataCategories);
+
+      dataListControl.forEach((e) => pricePerItem.splice(0, 0, 0));
+      setPricePerItem(pricePerItem);
+    };
+
+    function checkForFavorites() {
+      dataListControl.forEach((e) => favoriteArray.splice(0, 0, false));
+
+      const getFavoriteArray = JSON.parse(
+        localStorage.getItem("favoriteArray"),
+      );
+
+      if (getFavoriteArray !== null) {
+        setFavoriteArray(getFavoriteArray);
+      } else {
+        localStorage.setItem("favoriteArray", JSON.stringify(favoriteArray));
+      }
     }
-  }
+
+    fetchItems();
+    checkForFavorites();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (inputSearch === "") {
+      const filterPerSearch = dataListControl.filter((e) =>
+        e.name.toLowerCase().includes(inputSearch),
+      );
+      setData(filterPerSearch);
+    }
+  }, [inputSearch, dataListControl]);
 
   function handleAddItem(event, element, index) {
     event.preventDefault();
@@ -95,7 +137,7 @@ function Catalog() {
       photo: element.photo,
       amount: amount,
       countPerItem: countPerItem,
-      priceUnity: price,
+      price: price,
     };
 
     dispatch({
@@ -110,33 +152,43 @@ function Catalog() {
     let price = parseFloat(element.price);
     let amount = parseInt(element.item) - 1;
 
-    if (amount < 0) {
+    element.item = amount;
+
+    let countPerItem = pricePerItem[index] - price;
+    let count = priceCount - price;
+    pricePerItem[index] = countPerItem;
+
+    if (amount <= 0) {
       amount = 0;
       element.item = 0;
       pricePerItem[index] = 0;
       price = 0;
+      countPerItem = 0;
+      count = 0;
+
+      const product = {
+        id: element.id,
+        name: element.name,
+        photo: element.photo,
+        amount: amount,
+        countPerItem: countPerItem,
+      };
+
+      dispatch({
+        type: "REMOVE_ITEM",
+        product,
+      });
     }
 
-    let countPerItem = pricePerItem[index] - price;
-    let count = priceCount - price;
-
-    setPriceCount(count);
-
-    element.item = amount;
-    pricePerItem[index] = countPerItem;
-
-    const product = {
+    dispatch({
+      type: "UPDATE_REMOVE_ITEM",
       id: element.id,
-      name: element.name,
-      photo: element.photo,
       amount: amount,
       countPerItem: countPerItem,
-    };
-
-    dispatch({
-      type: "REMOVE_ITEM",
-      product,
+      price: price,
     });
+
+    setPriceCount(count);
   }
 
   function handleAddFavorite(event, index) {
@@ -168,15 +220,6 @@ function Catalog() {
     );
     setData(filterPerSearch);
   }
-
-  useEffect(() => {
-    if (inputSearch === "") {
-      const filterPerSearch = dataListControl.filter((e) =>
-        e.name.toLowerCase().includes(inputSearch),
-      );
-      setData(filterPerSearch);
-    }
-  }, [inputSearch]);
 
   const handleBuy = () => {
     const path = "/cart";
@@ -288,11 +331,6 @@ function Catalog() {
             >
               Comprar R$ {priceCount.toFixed(2).replace(".", ",")}
             </Button>
-
-            {/* <div className="authenticated">
-              <span>Usuário: {user.name}</span>
-              <LogoutButton />
-            </div> */}
           </div>
         ) : (
           <LoginButton />

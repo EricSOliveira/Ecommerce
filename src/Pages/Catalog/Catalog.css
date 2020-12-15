@@ -35,7 +35,7 @@ button:active {
   background: transparent;
   outline: none!important;
   border-radius: 4px;
-  padding: 5px 10px;
+  padding: 5px 10px 2px 10px;
   margin-left: 5px;
 }
 
@@ -80,12 +80,3 @@ footer .footer {
   justify-content: space-evenly;
   align-items: center;
 }
-
-/* footer .footer .authenticated {
-  position: absolute;
-  right: 5vw;
-  top: 5vh;
-  display: flex;
-  flex-direction: row;
-  width: 122px;
-} */

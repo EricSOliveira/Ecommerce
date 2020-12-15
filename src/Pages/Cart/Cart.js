@@ -45,26 +45,26 @@ function Cart() {
   }
 
   function incrementAmount(element) {
-    const { id, amount, countPerItem, priceUnity } = element;
+    const { id, amount, countPerItem, price } = element;
 
     dispatch({
       type: "UPDATE_ADD_ITEM",
       id,
       amount,
       countPerItem,
-      priceUnity,
+      price,
     });
   }
 
   function decrementAmount(element) {
-    const { id, amount, countPerItem, priceUnity } = element;
+    const { id, amount, countPerItem, price} = element;
 
     dispatch({
       type: "UPDATE_REMOVE_ITEM",
       id,
       amount,
       countPerItem,
-      priceUnity,
+      price,
     });
   }
 

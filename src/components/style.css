@@ -12,6 +12,7 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
+  transition: all .15s ease-in-out;
 }
 
 
@@ -23,6 +24,7 @@
   background: darkgrey;
   color: black;
   border-radius: 4px;
+  width: max-content;
 }
 
 .authenticated:hover .dataUserShow {
