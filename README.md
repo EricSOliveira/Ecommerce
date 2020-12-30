@@ -1,8 +1,7 @@
 Clone o repositório abaixo:
 
-Bitbucket - git clone https://EricSOliveira@bitbucket.org/EricSOliveira/miniecommerce.git
-
 Github - $ git clone https://github.com/EricSOliveira/Ecommerce.git
+
 
 
 ### `yarn install` ou `npm install`
